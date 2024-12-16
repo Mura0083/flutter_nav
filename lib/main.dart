@@ -16,14 +16,24 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       home: const MainScreen(),
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
-        textTheme: Theme.of(context).textTheme.copyWith(
-              bodyLarge: const TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.w900,
-                  color: Colors.white),
-            ),
-      ),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+          textTheme: Theme.of(context).textTheme.copyWith(
+                bodyLarge: const TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w900,
+                    color: Colors.white),
+                bodyMedium: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black),
+                bodySmall: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black),
+              ),
+          inputDecorationTheme: InputDecorationTheme(
+            hintStyle: Theme.of(context).textTheme.bodySmall,
+          )),
     );
   }
 }
@@ -79,7 +89,7 @@ class HomePage extends StatelessWidget {
               child: Container(
             decoration: const BoxDecoration(
                 image: DecorationImage(
-              image: AssetImage('assets/image/background.jpg'),
+              image: AssetImage('assets/images/background.jpg'),
               fit: BoxFit.cover,
             )),
           )),
@@ -197,7 +207,8 @@ class _ContactPageState extends State<ContactPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: const Text('Contact Us')),
-        body: Padding(
+        resizeToAvoidBottomInset: true,
+        body: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
           child: Form(
             key: _formKey,
@@ -211,11 +222,13 @@ class _ContactPageState extends State<ContactPage> {
                 const SizedBox(height: 8.0),
                 TextFormField(
                   autofocus: true,
-                  decoration: const InputDecoration(
-                    icon: Icon(Icons.person),
+                  decoration: InputDecoration(
+                    icon: const Icon(Icons.person),
                     hintText: 'Enter your name',
                     labelText: 'Name',
+                    labelStyle: Theme.of(context).textTheme.bodyMedium,
                   ),
+                  style: Theme.of(context).textTheme.bodySmall,
                   keyboardType: TextInputType.name,
                   textInputAction: TextInputAction.next,
                   validator: (value) => value == null || value.isEmpty
@@ -223,13 +236,15 @@ class _ContactPageState extends State<ContactPage> {
                       : null,
                   onSaved: (value) => name = value,
                 ),
-                const SizedBox(height: 16.0),
+                const SizedBox(height: 32.0),
                 TextFormField(
-                  decoration: const InputDecoration(
-                    icon: Icon(Icons.email),
+                  decoration: InputDecoration(
+                    icon: const Icon(Icons.email),
                     hintText: 'Enter your email',
                     labelText: 'Email',
+                    labelStyle: Theme.of(context).textTheme.bodyMedium,
                   ),
+                  style: Theme.of(context).textTheme.bodySmall,
                   keyboardType: TextInputType.emailAddress,
                   textInputAction: TextInputAction.next,
                   validator: (value) => value == null || value.isEmpty
@@ -237,13 +252,15 @@ class _ContactPageState extends State<ContactPage> {
                       : null,
                   onSaved: (value) => email = value,
                 ),
-                const SizedBox(height: 16.0),
+                const SizedBox(height: 32.0),
                 TextFormField(
-                  decoration: const InputDecoration(
-                    icon: Icon(Icons.message),
+                  decoration: InputDecoration(
+                    icon: const Icon(Icons.message),
                     hintText: 'Enter your message',
                     labelText: 'Message',
+                    labelStyle: Theme.of(context).textTheme.bodyMedium,
                   ),
+                  style: Theme.of(context).textTheme.bodySmall,
                   keyboardType: TextInputType.multiline,
                   textInputAction: TextInputAction.newline,
                   maxLines: 5,
